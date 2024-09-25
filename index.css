@@ -31,3 +31,47 @@ body{
     text-align: center;
     text-transform: uppercase;
 }
+
+.hangman-box h1{
+    font-size: 1.45rem;
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.word-display{
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+}
+.word-display .letter{
+    width: 28px;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #000;
+}
+.word-display .letter.guessed{
+    border-color: transparent;
+    margin: -40px 0 35px;
+}
+
+.game-box h4 b{
+    text-align: center;
+    font-weight: 600;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.game-box .guessed-text b{
+    color: #ff0000;
+}
+.game-box .keyboard{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    justify-content: center;
+}
