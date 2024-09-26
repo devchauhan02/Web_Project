@@ -58,7 +58,7 @@ body{
     font-weight: 500;
     margin-bottom: 15px;
 }
-.game-box .guessed-text b{
+.game-box .guesses-text b{
     color: #ff0000;
 }
 .game-box .keyboard{
