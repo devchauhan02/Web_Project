@@ -1,8 +1,10 @@
-const keyboardDiv = document.querySelector(".keyboard");
-const wordDisplay = document.querySelector(".word-display");
-const guessesText = document.querySelector(".guesses-text");
+const hangmanImage = document.querySelector(".hangman-box img");
+const keyboardDiv  = document.querySelector(".keyboard");
+const wordDisplay  = document.querySelector(".word-display");
+const guessesText  = document.querySelector(".guesses-text");
+const gameModal    = document.querySelector(".game-modal");   
 
-let currentWord, wordGuessCount = 0;
+let currentWord,  correctLetters = [] ,  wordGuessCount = 0;
 const maxGuesses = 6;
 
 const getRandomWord = () => {
@@ -12,27 +14,36 @@ const getRandomWord = () => {
     console.log(word);
     document.querySelector(".hint-text b").innerText = hint;
     wordDisplay.innerHTML = word.split("").map(() => `<li class="letter"></li>`).join("");
+} 
+
+const gameOver  = (isVictory) => {
+    setTimeout(() => {
+        gameModal.classList.add("show");
+    },300)
 }
 
 const initGame = (button, clickedLetter) => {
-    // Disable the button after it's clicked
-    button.disabled = true;
-
+  //Checking if clickedLetter exist or not
     if (currentWord.includes(clickedLetter)) {
        [...currentWord].forEach((letter,index) => {
         if(letter === clickedLetter){
+            correctLetters.push(letter);
             wordDisplay.querySelectorAll("li")[index].innerText = letter
             wordDisplay.querySelectorAll("li")[index].classList.add("guessed");
         }
        })
+        // Reveal the letter in the display (to be implemented if needed)
     } else {
         wordGuessCount++;
+        hangmanImage.src = `hangman-${wordGuessCount}.svg`;
     }
+    // Disable the button after it's clicked
+    button.disabled = true;
     guessesText.innerText = `Incorrect Guesses : ${wordGuessCount}  / ${maxGuesses}`;
 
-    if (wordGuessCount >= maxGuesses) {
-        console.log("Game Over!");
-    }
+    //calling gameOver functions if any of these condition meets
+    if(wordGuessCount === maxGuesses) return gameOver(false);
+    if(correctLetters.length === currentWord.length) return gameOver(true);
 }
 
 //creating keyboard buttons and adding event listener
